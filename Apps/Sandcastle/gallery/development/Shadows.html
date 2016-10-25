@@ -219,7 +219,7 @@ var viewModel = {
     size : 1024,
     modelOptions : ['Wood Tower', 'Cesium Air', 'Cesium Man', 'Transparent Box', 'Shadow Tester', 'Shadow Tester 2', 'Shadow Tester 3', 'Shadow Tester 4', 'Shadow Tester Point'],
     model : 'Shadow Tester',
-    locationOptions : ['Exton', 'Everest', 'Pinnacle PA', 'Seneca Rocks', 'Half Dome'],
+    locationOptions : ['Exton', 'Everest', 'Pinnacle PA', 'Seneca Rocks', 'Half Dome', '3D Tiles'],
     location : 'Pinnacle PA',
     modelPositionOptions : ['Center', 'Ground', 'High', 'Higher', 'Space'],
     modelPosition : 'Center',
@@ -302,6 +302,11 @@ var uiOptions = {
         'Half Dome' : {
             'centerLongitude' : -2.0862479628,
             'centerLatitude' : 0.6587902522
+        },
+        '3D Tiles' : {
+            'centerLongitude' : -1.31968,
+            'centerLatitude' : 0.698874,
+            'tileset' : '../../../Specs/Data/Cesium3DTiles/Tilesets/Tileset'
         }
     }
 };
@@ -569,6 +574,10 @@ function updateModels() {
     createBoxRTC(position2);
     createSphere(position1);
 
+    if (Cesium.defined(location.tileset)) {
+        createTileset(location.tileset);
+    }
+
     // Add a grid of models
     if (viewModel.grid) {
         var spacing = 0.00002;
@@ -584,8 +593,14 @@ function updateModels() {
     }
 }
 
+function createTileset(url) {
+    scene.primitives.add(new Cesium.Cesium3DTileset({
+        url : url
+    }));
+}
+
 function createModel(url, origin) {
-    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, 0.0, 0.0, 0.0);
+    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, new Cesium.HeadingPitchRoll());
 
     var model = scene.primitives.add(Cesium.Model.fromGltf({
         url : url,
@@ -606,7 +621,7 @@ function createModel(url, origin) {
 }
 
 function createBoxRTC(origin) {
-    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, 0.0, 0.0, 0.0);
+    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, new Cesium.HeadingPitchRoll());
 
     var boxGeometry = Cesium.BoxGeometry.createGeometry(Cesium.BoxGeometry.fromDimensions({
         vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT,
@@ -645,7 +660,7 @@ function createBoxRTC(origin) {
 }
 
 function createBox(origin) {
-    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, 0.0, 0.0, 0.0);
+    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, new Cesium.HeadingPitchRoll());
 
     var box = new Cesium.Primitive({
         geometryInstances : new Cesium.GeometryInstance({
@@ -670,7 +685,7 @@ function createBox(origin) {
 }
 
 function createSphere(origin) {
-    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, 0.0, 0.0, 0.0);
+    var modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(origin, new Cesium.HeadingPitchRoll());
 
     var sphere = new Cesium.Primitive({
         geometryInstances : new Cesium.GeometryInstance({

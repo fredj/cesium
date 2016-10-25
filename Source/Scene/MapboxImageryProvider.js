@@ -66,13 +66,16 @@ define([
         this._mapId = mapId;
         this._accessToken = MapboxApi.getAccessToken(options.accessToken);
         var format = defaultValue(options.format, 'png');
-        this._format = format.replace('.', '');
+        if (!/\./.test(format)) {
+            format = '.' + format;
+        }
+        this._format = format;
 
         var templateUrl = url;
         if (!trailingSlashRegex.test(url)) {
             templateUrl += '/';
         }
-        templateUrl += mapId + '/{z}/{x}/{y}.' + this._format;
+        templateUrl += mapId + '/{z}/{x}/{y}' + this._format;
         if (defined(this._accessToken)) {
             templateUrl += '?access_token=' + this._accessToken;
         }
@@ -309,6 +312,7 @@ define([
      * @param {Number} x The tile X coordinate.
      * @param {Number} y The tile Y coordinate.
      * @param {Number} level The tile level.
+     * @param {Number} [distance] The distance of the tile from the camera, used to prioritize requests.
      * @returns {Promise.<Image|Canvas>|undefined} A promise for the image that will resolve when the image is available, or
      *          undefined if there are too many active requests to the server, and the request
      *          should be retried later.  The resolved image may be either an
@@ -316,8 +320,8 @@ define([
      *
      * @exception {DeveloperError} <code>requestImage</code> must not be called before the imagery provider is ready.
      */
-    MapboxImageryProvider.prototype.requestImage = function(x, y, level) {
-        return this._imageryProvider.requestImage(x, y, level);
+    MapboxImageryProvider.prototype.requestImage = function(x, y, level, distance) {
+        return this._imageryProvider.requestImage(x, y, level, distance);
     };
 
     /**
