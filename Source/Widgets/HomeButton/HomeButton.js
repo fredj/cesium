@@ -1,10 +1,9 @@
-import defined from '../../Core/defined.js';
 import defineProperties from '../../Core/defineProperties.js';
 import destroyObject from '../../Core/destroyObject.js';
-import DeveloperError from '../../Core/DeveloperError.js';
 import knockout from '../../ThirdParty/knockout.js';
 import getElement from '../getElement.js';
 import HomeButtonViewModel from './HomeButtonViewModel.js';
+import Check from '../../Core/Check.js';
 
     /**
      * A single button widget for returning to the default camera view of the current scene.
@@ -18,9 +17,7 @@ import HomeButtonViewModel from './HomeButtonViewModel.js';
      */
     function HomeButton(container, scene, duration) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug');
 
         container = getElement(container);

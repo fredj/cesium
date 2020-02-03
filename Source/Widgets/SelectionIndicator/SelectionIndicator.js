@@ -1,10 +1,9 @@
-import defined from '../../Core/defined.js';
 import defineProperties from '../../Core/defineProperties.js';
 import destroyObject from '../../Core/destroyObject.js';
-import DeveloperError from '../../Core/DeveloperError.js';
 import knockout from '../../ThirdParty/knockout.js';
 import getElement from '../getElement.js';
 import SelectionIndicatorViewModel from './SelectionIndicatorViewModel.js';
+import Check from '../../Core/Check.js';
 
     /**
      * A widget for displaying an indicator on a selected object.
@@ -19,9 +18,7 @@ import SelectionIndicatorViewModel from './SelectionIndicatorViewModel.js';
      */
     function SelectionIndicator(container, scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug')
 
         container = getElement(container);

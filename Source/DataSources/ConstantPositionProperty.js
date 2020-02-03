@@ -2,10 +2,10 @@ import Cartesian3 from '../Core/Cartesian3.js';
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import ReferenceFrame from '../Core/ReferenceFrame.js';
 import PositionProperty from './PositionProperty.js';
+import Check from '../Core/Check.js';
 
     /**
      * A {@link PositionProperty} whose value does not change in respect to the
@@ -106,12 +106,8 @@ import PositionProperty from './PositionProperty.js';
      */
     ConstantPositionProperty.prototype.getValueInReferenceFrame = function(time, referenceFrame, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
-        if (!defined(referenceFrame)) {
-            throw new DeveloperError('referenceFrame is required.');
-        }
+        Check.defined('time', time);
+        Check.defined('referenceFrame', referenceFrame);
         //>>includeEnd('debug');
 
         return PositionProperty.convertToReferenceFrame(time, this._value, this._referenceFrame, referenceFrame, result);

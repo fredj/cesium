@@ -29,6 +29,7 @@ import Transforms from '../Core/Transforms.js';
 import CameraFlightPath from './CameraFlightPath.js';
 import MapMode2D from './MapMode2D.js';
 import SceneMode from './SceneMode.js';
+import Check from '../Core/Check.js';
 
     /**
      * The camera is defined by a position, orientation, and view frustum.
@@ -62,9 +63,7 @@ import SceneMode from './SceneMode.js';
      */
     function Camera(scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
         this._scene = scene;
 
@@ -866,9 +865,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.update = function(mode) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(mode)) {
-            throw new DeveloperError('mode is required.');
-        }
+        Check.defined('mode', mode);
         if (mode === SceneMode.SCENE2D && !(this.frustum instanceof OrthographicOffCenterFrustum)) {
             throw new DeveloperError('An OrthographicOffCenterFrustum is required in 2D.');
         }
@@ -1264,9 +1261,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.worldToCameraCoordinates = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1285,9 +1280,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.worldToCameraCoordinatesPoint = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1306,9 +1299,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.worldToCameraCoordinatesVector = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1327,9 +1318,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.cameraToWorldCoordinates = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1348,9 +1337,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.cameraToWorldCoordinatesPoint = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1369,9 +1356,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.cameraToWorldCoordinatesVector = function(cartesian, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -1616,9 +1601,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.look = function(axis, angle) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(axis)) {
-            throw new DeveloperError('axis is required.');
-        }
+        Check.defined('axis', axis);
         //>>includeEnd('debug');
 
         var turnAngle = defaultValue(angle, this.defaultLookAmount);
@@ -1674,9 +1657,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.rotate = function(axis, angle) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(axis)) {
-            throw new DeveloperError('axis is required.');
-        }
+        Check.defined('axis', axis);
         //>>includeEnd('debug');
 
         var turnAngle = defaultValue(angle, this.defaultRotateAmount);
@@ -1935,12 +1916,8 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.lookAt = function(target, offset) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(target)) {
-            throw new DeveloperError('target is required');
-        }
-        if (!defined(offset)) {
-            throw new DeveloperError('offset is required');
-        }
+        Check.defined('target', target);
+        Check.defined('offset', offset);
         if (this._mode === SceneMode.MORPHING) {
             throw new DeveloperError('lookAt is not supported while morphing.');
         }
@@ -2001,9 +1978,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.lookAtTransform = function(transform, offset) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(transform)) {
-            throw new DeveloperError('transform is required');
-        }
+        Check.defined('transform', transform);
         if (this._mode === SceneMode.MORPHING) {
             throw new DeveloperError('lookAtTransform is not supported while morphing.');
         }
@@ -2329,9 +2304,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.getRectangleCameraCoordinates = function(rectangle, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(rectangle)) {
-            throw new DeveloperError('rectangle is required');
-        }
+        Check.defined('rectangle', rectangle);
         //>>includeEnd('debug');
         var mode = this._mode;
 
@@ -2540,9 +2513,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.distanceToBoundingSphere = function(boundingSphere) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingSphere)) {
-            throw new DeveloperError('boundingSphere is required.');
-        }
+        Check.defined('boundingSphere', boundingSphere);
         //>>includeEnd('debug');
 
         var toCenter = Cartesian3.subtract(this.positionWC, boundingSphere.center, scratchToCenter);
@@ -2562,9 +2533,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.getPixelSize = function(boundingSphere, drawingBufferWidth, drawingBufferHeight) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingSphere)) {
-            throw new DeveloperError('boundingSphere is required.');
-        }
+        Check.defined('boundingSphere', boundingSphere);
         if (!defined(drawingBufferWidth)) {
             throw new DeveloperError('drawingBufferWidth is required.');
         }
@@ -2659,9 +2628,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.createCorrectPositionTween = function(duration) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(duration)) {
-            throw new DeveloperError('duration is required.');
-        }
+        Check.defined('duration', duration);
         //>>includeEnd('debug');
 
         if (this._mode === SceneMode.COLUMBUS_VIEW) {
@@ -2751,9 +2718,7 @@ import SceneMode from './SceneMode.js';
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);
         var destination = options.destination;
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(destination)) {
-            throw new DeveloperError('destination is required.');
-        }
+        Check.defined('destination', destination);
         //>>includeEnd('debug');
 
         var mode = this._mode;
@@ -2908,9 +2873,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.viewBoundingSphere = function(boundingSphere, offset) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingSphere)) {
-            throw new DeveloperError('boundingSphere is required.');
-        }
+        Check.defined('boundingSphere', boundingSphere);
 
         if (this._mode === SceneMode.MORPHING) {
             throw new DeveloperError('viewBoundingSphere is not supported while morphing.');
@@ -2957,9 +2920,7 @@ import SceneMode from './SceneMode.js';
      */
     Camera.prototype.flyToBoundingSphere = function(boundingSphere, options) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingSphere)) {
-            throw new DeveloperError('boundingSphere is required.');
-        }
+        Check.defined('boundingSphere', boundingSphere);
         //>>includeEnd('debug');
 
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);

@@ -4,7 +4,6 @@ import Cartesian2 from '../Core/Cartesian2.js';
 import Color from '../Core/Color.js';
 import defined from '../Core/defined.js';
 import destroyObject from '../Core/destroyObject.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Matrix4 from '../Core/Matrix4.js';
 import Resource from '../Core/Resource.js';
 import ColorBlendMode from '../Scene/ColorBlendMode.js';
@@ -14,6 +13,7 @@ import ModelAnimationLoop from '../Scene/ModelAnimationLoop.js';
 import ShadowMode from '../Scene/ShadowMode.js';
 import BoundingSphereState from './BoundingSphereState.js';
 import Property from './Property.js';
+import Check from '../Core/Check.js';
 
     var defaultScale = 1.0;
     var defaultMinimumPixelSize = 0.0;
@@ -41,12 +41,8 @@ import Property from './Property.js';
      */
     function ModelVisualizer(scene, entityCollection) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
-        if (!defined(entityCollection)) {
-            throw new DeveloperError('entityCollection is required.');
-        }
+        Check.defined('scene', scene);
+        Check.defined('entityCollection', entityCollection);
         //>>includeEnd('debug');
 
         entityCollection.collectionChanged.addEventListener(ModelVisualizer.prototype._onCollectionChanged, this);
@@ -68,9 +64,7 @@ import Property from './Property.js';
      */
     ModelVisualizer.prototype.update = function(time) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         //>>includeEnd('debug');
 
         var entities = this._entitiesToVisualize.values;
@@ -242,12 +236,8 @@ import Property from './Property.js';
      */
     ModelVisualizer.prototype.getBoundingSphere = function(entity, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(entity)) {
-            throw new DeveloperError('entity is required.');
-        }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('entity', entity);
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var modelData = this._modelHash[entity.id];

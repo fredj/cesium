@@ -121,9 +121,7 @@ import TimeConstants from './TimeConstants.js';
         } else {
             resultat = function (origin, ellipsoid, result) {
                 //>>includeStart('debug', pragmas.debug);
-                if (!defined(origin)) {
-                    throw new DeveloperError('origin is required.');
-                }
+                Check.defined('origin', origin);
                 //>>includeEnd('debug');
                 if (!defined(result)) {
                     result = new Matrix4();
@@ -438,9 +436,7 @@ import TimeConstants from './TimeConstants.js';
      */
     Transforms.computeTemeToPseudoFixedMatrix = function (date, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(date)) {
-            throw new DeveloperError('date is required.');
-        }
+        Check.defined('date', date);
         //>>includeEnd('debug');
 
         // GMST is actually computed using UT1.  We're using UTC as an approximation of UT1.
@@ -573,9 +569,7 @@ import TimeConstants from './TimeConstants.js';
      */
     Transforms.computeIcrfToFixedMatrix = function(date, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(date)) {
-            throw new DeveloperError('date is required.');
-        }
+        Check.defined('date', date);
         //>>includeEnd('debug');
         if (!defined(result)) {
             result = new Matrix3();
@@ -621,9 +615,7 @@ import TimeConstants from './TimeConstants.js';
      */
     Transforms.computeFixedToIcrfMatrix = function(date, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(date)) {
-            throw new DeveloperError('date is required.');
-        }
+        Check.defined('date', date);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -779,13 +771,8 @@ import TimeConstants from './TimeConstants.js';
      */
     Transforms.rotationMatrixFromPositionVelocity = function(position, velocity, ellipsoid, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(position)) {
-            throw new DeveloperError('position is required.');
-        }
-
-        if (!defined(velocity)) {
-            throw new DeveloperError('velocity is required.');
-        }
+        Check.defined('position', position);
+        Check.defined('velocity', velocity);
         //>>includeEnd('debug');
 
         var normal = defaultValue(ellipsoid, Ellipsoid.WGS84).geodeticSurfaceNormal(position, normalScratch);
@@ -843,9 +830,7 @@ import TimeConstants from './TimeConstants.js';
         if (!defined(matrix)) {
             throw new DeveloperError('matrix is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var rtcCenter = Matrix4.getTranslation(matrix, scratchCenter);
@@ -878,9 +863,7 @@ import TimeConstants from './TimeConstants.js';
         if (!defined(center)) {
             throw new DeveloperError('center is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var ellipsoid = projection.ellipsoid;

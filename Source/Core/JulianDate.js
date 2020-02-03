@@ -8,6 +8,7 @@ import isLeapYear from './isLeapYear.js';
 import LeapSecond from './LeapSecond.js';
 import TimeConstants from './TimeConstants.js';
 import TimeStandard from './TimeStandard.js';
+import Check from '../Core/Check.js';
 
     var gregorianDateScratch = new GregorianDate();
     var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -855,9 +856,7 @@ import TimeStandard from './TimeStandard.js';
         if (!defined(seconds)) {
             throw new DeveloperError('seconds is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         return setComponents(julianDate.dayNumber, julianDate.secondsOfDay + seconds, result);
@@ -879,9 +878,7 @@ import TimeStandard from './TimeStandard.js';
         if (!defined(minutes)) {
             throw new DeveloperError('minutes is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var newSecondsOfDay = julianDate.secondsOfDay + (minutes * TimeConstants.SECONDS_PER_MINUTE);
@@ -904,9 +901,7 @@ import TimeStandard from './TimeStandard.js';
         if (!defined(hours)) {
             throw new DeveloperError('hours is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var newSecondsOfDay = julianDate.secondsOfDay + (hours * TimeConstants.SECONDS_PER_HOUR);
@@ -929,9 +924,7 @@ import TimeStandard from './TimeStandard.js';
         if (!defined(days)) {
             throw new DeveloperError('days is required.');
         }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
 
         var newJulianDayNumber = julianDate.dayNumber + days;

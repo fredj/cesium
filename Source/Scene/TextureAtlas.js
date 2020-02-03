@@ -12,6 +12,7 @@ import RuntimeError from '../Core/RuntimeError.js';
 import Framebuffer from '../Renderer/Framebuffer.js';
 import Texture from '../Renderer/Texture.js';
 import when from '../ThirdParty/when.js';
+import Check from '../Core/Check.js';
 
     // The atlas is made up of regions of space called nodes that contain images or child nodes.
     function TextureAtlasNode(bottomLeft, topRight, childNode1, childNode2, imageIndex) {
@@ -316,12 +317,8 @@ import when from '../ThirdParty/when.js';
      */
     TextureAtlas.prototype.addImage = function(id, image) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
-        if (!defined(image)) {
-            throw new DeveloperError('image is required.');
-        }
+        Check.defined('id', id);
+        Check.defined('image', image);
         //>>includeEnd('debug');
 
         var indexPromise = this._idHash[id];
@@ -376,9 +373,7 @@ import when from '../ThirdParty/when.js';
      */
     TextureAtlas.prototype.addSubRegion = function(id, subRegion) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
+        Check.defined('id', id);
         if (!defined(subRegion)) {
             throw new DeveloperError('subRegion is required.');
         }

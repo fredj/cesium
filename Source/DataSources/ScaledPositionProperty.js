@@ -1,10 +1,10 @@
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Ellipsoid from '../Core/Ellipsoid.js';
 import Event from '../Core/Event.js';
 import ReferenceFrame from '../Core/ReferenceFrame.js';
 import Property from './Property.js';
+import Check from '../Core/Check.js';
 
     /**
      * This is a temporary class for scaling position properties to the WGS84 surface.
@@ -58,12 +58,8 @@ import Property from './Property.js';
 
     ScaledPositionProperty.prototype.getValueInReferenceFrame = function(time, referenceFrame, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
-        if (!defined(referenceFrame)) {
-            throw new DeveloperError('referenceFrame is required.');
-        }
+        Check.defined('time', time);
+        Check.defined('referenceFrame', referenceFrame);
         //>>includeEnd('debug');
 
         if (!defined(this._value)) {

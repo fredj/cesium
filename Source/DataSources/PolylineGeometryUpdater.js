@@ -350,9 +350,7 @@ import Property from './Property.js';
      */
     PolylineGeometryUpdater.prototype.createFillGeometryInstance = function(time) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
 
         if (!this._fillEnabled) {
             throw new DeveloperError('This instance does not represent a filled geometry.');

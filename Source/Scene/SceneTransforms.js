@@ -4,13 +4,13 @@ import Cartesian3 from '../Core/Cartesian3.js';
 import Cartesian4 from '../Core/Cartesian4.js';
 import Cartographic from '../Core/Cartographic.js';
 import defined from '../Core/defined.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import CesiumMath from '../Core/Math.js';
 import Matrix4 from '../Core/Matrix4.js';
 import OrthographicFrustum from '../Core/OrthographicFrustum.js';
 import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
 import Transforms from '../Core/Transforms.js';
 import SceneMode from './SceneMode.js';
+import Check from '../Core/Check.js';
 
     /**
      * Functions that do scene-dependent transforms between rendering-related coordinate systems.
@@ -74,12 +74,8 @@ import SceneMode from './SceneMode.js';
      */
     SceneTransforms.wgs84WithEyeOffsetToWindowCoordinates = function(scene, position, eyeOffset, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
-        if (!defined(position)) {
-            throw new DeveloperError('position is required.');
-        }
+        Check.defined('scene', scene);
+        Check.defined('position', position);
         //>>includeEnd('debug');
 
         // Transform for 3D, 2D, or Columbus view

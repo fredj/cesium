@@ -46,6 +46,7 @@ import SelectionIndicator from '../SelectionIndicator/SelectionIndicator.js';
 import subscribeAndEvaluate from '../subscribeAndEvaluate.js';
 import Timeline from '../Timeline/Timeline.js';
 import VRButton from '../VRButton/VRButton.js';
+import Check from './Check.js';
 
     var boundingSphereScratch = new BoundingSphere();
 
@@ -304,9 +305,7 @@ import VRButton from '../VRButton/VRButton.js';
      */
     function Viewer(container, options) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug');
 
         container = getElement(container);

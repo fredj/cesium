@@ -1,6 +1,5 @@
 import Check from './Check.js';
 import defaultValue from './defaultValue.js';
-import defined from './defined.js';
 import DeveloperError from './DeveloperError.js';
 import CesiumMath from './Math.js';
 
@@ -65,9 +64,7 @@ import CesiumMath from './Math.js';
         var length = times.length;
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         if (time < times[0] || time > times[length - 1]) {
             throw new DeveloperError('time is out of range.');
         }

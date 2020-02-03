@@ -1,9 +1,9 @@
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Check from '../Core/Check.js';
 
     /**
      * Describes a two dimensional label located at the position of the containing {@link Entity}.
@@ -355,9 +355,7 @@ import createPropertyDescriptor from './createPropertyDescriptor.js';
      */
     LabelGraphics.prototype.merge = function(source) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(source)) {
-            throw new DeveloperError('source is required.');
-        }
+        Check.defined('source', source);
         //>>includeEnd('debug');
 
         this.show = defaultValue(this.show, source.show);

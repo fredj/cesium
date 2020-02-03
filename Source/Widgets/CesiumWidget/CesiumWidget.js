@@ -21,6 +21,7 @@ import SkyAtmosphere from '../../Scene/SkyAtmosphere.js';
 import SkyBox from '../../Scene/SkyBox.js';
 import Sun from '../../Scene/Sun.js';
 import getElement from '../getElement.js';
+import Check from '../../Core/Check.js';
 
     function getDefaultSkyBoxUrl(suffix) {
         return buildModuleUrl('Assets/Textures/SkyBox/tycho2t3_80_' + suffix + '.jpg');
@@ -179,9 +180,7 @@ import getElement from '../getElement.js';
      */
     function CesiumWidget(container, options) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug');
 
         container = getElement(container);

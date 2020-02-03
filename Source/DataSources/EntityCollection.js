@@ -9,6 +9,7 @@ import JulianDate from '../Core/JulianDate.js';
 import RuntimeError from '../Core/RuntimeError.js';
 import TimeInterval from '../Core/TimeInterval.js';
 import Entity from './Entity.js';
+import Check from '../Core/Check.js';
 
     var entityOptionsScratch = {
         id : undefined
@@ -253,9 +254,7 @@ import Entity from './Entity.js';
      */
     EntityCollection.prototype.add = function(entity) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(entity)) {
-            throw new DeveloperError('entity is required.');
-        }
+        Check.defined('entity', entity);
         //>>includeEnd('debug');
 
         if (!(entity instanceof Entity)) {
@@ -373,9 +372,7 @@ import Entity from './Entity.js';
      */
     EntityCollection.prototype.getById = function(id) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
+        Check.defined('id', id);
         //>>includeEnd('debug');
 
         return this._entities.get(id);
@@ -389,9 +386,7 @@ import Entity from './Entity.js';
      */
     EntityCollection.prototype.getOrCreateEntity = function(id) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
+        Check.defined('id', id);
         //>>includeEnd('debug');
 
         var entity = this._entities.get(id);

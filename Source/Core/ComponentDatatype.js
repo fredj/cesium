@@ -3,6 +3,7 @@ import defined from './defined.js';
 import DeveloperError from './DeveloperError.js';
 import freezeObject from './freezeObject.js';
 import WebGLConstants from './WebGLConstants.js';
+import Check from '../Core/Check.js';
 
     /**
      * WebGL component datatypes.  Components are intrinsics,
@@ -206,9 +207,7 @@ import WebGLConstants from './WebGLConstants.js';
      */
     ComponentDatatype.createTypedArray = function(componentDatatype, valuesOrLength) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(componentDatatype)) {
-            throw new DeveloperError('componentDatatype is required.');
-        }
+        Check.defined('componentDatatype', componentDatatype);
         if (!defined(valuesOrLength)) {
             throw new DeveloperError('valuesOrLength is required.');
         }
@@ -251,9 +250,7 @@ import WebGLConstants from './WebGLConstants.js';
      */
     ComponentDatatype.createArrayBufferView = function(componentDatatype, buffer, byteOffset, length) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(componentDatatype)) {
-            throw new DeveloperError('componentDatatype is required.');
-        }
+        Check.defined('componentDatatype', componentDatatype);
         if (!defined(buffer)) {
             throw new DeveloperError('buffer is required.');
         }

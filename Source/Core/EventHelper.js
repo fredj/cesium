@@ -1,5 +1,4 @@
-import defined from './defined.js';
-import DeveloperError from './DeveloperError.js';
+import Check from './Check.js';
 
     /**
      * A convenience object that simplifies the common pattern of attaching event listeners
@@ -38,9 +37,7 @@ import DeveloperError from './DeveloperError.js';
      */
     EventHelper.prototype.add = function(event, listener, scope) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(event)) {
-            throw new DeveloperError('event is required');
-        }
+        Check.defined('event', event);
         //>>includeEnd('debug');
 
         var removalFunction = event.addEventListener(listener, scope);

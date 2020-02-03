@@ -446,9 +446,7 @@ import WallGraphics from './WallGraphics.js';
      */
     Entity.prototype.isAvailable = function(time) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         //>>includeEnd('debug');
 
         var availability = this._availability;
@@ -469,9 +467,7 @@ import WallGraphics from './WallGraphics.js';
         var propertyNames = this._propertyNames;
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(propertyName)) {
-            throw new DeveloperError('propertyName is required.');
-        }
+        Check.defined('propertyName', propertyName);
         if (propertyNames.indexOf(propertyName) !== -1) {
             throw new DeveloperError(propertyName + ' is already a registered property.');
         }
@@ -497,9 +493,7 @@ import WallGraphics from './WallGraphics.js';
         var index = propertyNames.indexOf(propertyName);
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(propertyName)) {
-            throw new DeveloperError('propertyName is required.');
-        }
+        Check.defined('propertyName', propertyName);
         if (index === -1) {
             throw new DeveloperError(propertyName + ' is not a registered property.');
         }
@@ -517,9 +511,7 @@ import WallGraphics from './WallGraphics.js';
      */
     Entity.prototype.merge = function(source) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(source)) {
-            throw new DeveloperError('source is required.');
-        }
+        Check.defined('source', source);
         //>>includeEnd('debug');
 
         //Name, show, and availability are not Property objects and are currently handled differently.

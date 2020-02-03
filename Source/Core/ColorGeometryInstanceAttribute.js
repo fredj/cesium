@@ -3,7 +3,7 @@ import ComponentDatatype from './ComponentDatatype.js';
 import defaultValue from './defaultValue.js';
 import defined from './defined.js';
 import defineProperties from './defineProperties.js';
-import DeveloperError from './DeveloperError.js';
+import Check from './Check.js';
 
     /**
      * Value and type information for per-instance geometry color.
@@ -123,9 +123,7 @@ import DeveloperError from './DeveloperError.js';
      */
     ColorGeometryInstanceAttribute.fromColor = function(color) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(color)) {
-            throw new DeveloperError('color is required.');
-        }
+        Check.defined('color', color);
         //>>includeEnd('debug');
 
         return new ColorGeometryInstanceAttribute(color.red, color.green, color.blue, color.alpha);
@@ -145,9 +143,7 @@ import DeveloperError from './DeveloperError.js';
      */
     ColorGeometryInstanceAttribute.toValue = function(color, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(color)) {
-            throw new DeveloperError('color is required.');
-        }
+        Check.defined('color', color);
         //>>includeEnd('debug');
 
         if (!defined(result)) {

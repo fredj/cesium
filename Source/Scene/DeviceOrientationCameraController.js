@@ -1,18 +1,16 @@
 import defined from '../Core/defined.js';
 import destroyObject from '../Core/destroyObject.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import CesiumMath from '../Core/Math.js';
 import Matrix3 from '../Core/Matrix3.js';
 import Quaternion from '../Core/Quaternion.js';
+import Check from '../Core/Check.js';
 
     /**
      * @private
      */
     function DeviceOrientationCameraController(scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         this._scene = scene;

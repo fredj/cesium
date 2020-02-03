@@ -3,12 +3,12 @@ import Cartesian3 from '../Core/Cartesian3.js';
 import Cartographic from '../Core/Cartographic.js';
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import EasingFunction from '../Core/EasingFunction.js';
 import CesiumMath from '../Core/Math.js';
 import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
 import PerspectiveOffCenterFrustum from '../Core/PerspectiveOffCenterFrustum.js';
 import SceneMode from './SceneMode.js';
+import Check from '../Core/Check.js';
 
     /**
      * Creates tweens for camera flights.
@@ -313,12 +313,8 @@ import SceneMode from './SceneMode.js';
         var destination = options.destination;
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
-        if (!defined(destination)) {
-            throw new DeveloperError('destination is required.');
-        }
+        Check.defined('scene', scene);
+        Check.defined('destination', destination);
         //>>includeEnd('debug');
         var mode = scene.mode;
 

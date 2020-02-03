@@ -1,10 +1,10 @@
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
 import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Check from '../Core/Check.js';
 
     /**
      * Describes an ellipse defined by a center point and semi-major and semi-minor axes.
@@ -299,9 +299,7 @@ import createPropertyDescriptor from './createPropertyDescriptor.js';
      */
     EllipseGraphics.prototype.merge = function(source) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(source)) {
-            throw new DeveloperError('source is required.');
-        }
+        Check.defined('source', source);
         //>>includeEnd('debug');
 
         this.show = defaultValue(this.show, source.show);

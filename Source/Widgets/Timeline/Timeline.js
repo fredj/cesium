@@ -6,6 +6,7 @@ import JulianDate from '../../Core/JulianDate.js';
 import getElement from '../getElement.js';
 import TimelineHighlightRange from './TimelineHighlightRange.js';
 import TimelineTrack from './TimelineTrack.js';
+import Check from '../../Core/Check.js';
 
     var timelineWheelDelta = 1e12;
 
@@ -71,12 +72,8 @@ import TimelineTrack from './TimelineTrack.js';
      */
     function Timeline(container, clock) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
-        if (!defined(clock)) {
-            throw new DeveloperError('clock is required.');
-        }
+        Check.defined('container', container);
+        Check.defined('clock', clock);
         //>>includeEnd('debug');
 
         container = getElement(container);

@@ -6,6 +6,7 @@ import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import getTimestamp from '../Core/getTimestamp.js';
 import TimeConstants from '../Core/TimeConstants.js';
+import Check from '../Core/Check.js';
 
     /**
      * Monitors the frame rate (frames per second) in a {@link Scene} and raises an event if the frame rate is
@@ -140,9 +141,7 @@ import TimeConstants from '../Core/TimeConstants.js';
      */
     FrameRateMonitor.fromScene = function(scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         if (!defined(scene._frameRateMonitor) || scene._frameRateMonitor.isDestroyed()) {

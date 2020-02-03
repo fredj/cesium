@@ -1,9 +1,9 @@
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import EventHelper from '../Core/EventHelper.js';
 import Property from './Property.js';
+import Check from '../Core/Check.js';
 
     /**
      * A {@link Property} whose value is an array whose items are the computed value
@@ -70,9 +70,7 @@ import Property from './Property.js';
      */
     PropertyArray.prototype.getValue = function(time, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         //>>includeEnd('debug');
 
         var value = this._value;

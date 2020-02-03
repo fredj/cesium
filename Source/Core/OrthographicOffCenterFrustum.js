@@ -7,6 +7,7 @@ import defineProperties from './defineProperties.js';
 import DeveloperError from './DeveloperError.js';
 import CesiumMath from './Math.js';
 import Matrix4 from './Matrix4.js';
+import Check from '../Core/Check.js';
 
     /**
      * The viewing frustum is defined by 6 planes.
@@ -161,9 +162,7 @@ import Matrix4 from './Matrix4.js';
      */
     OrthographicOffCenterFrustum.prototype.computeCullingVolume = function(position, direction, up) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(position)) {
-            throw new DeveloperError('position is required.');
-        }
+        Check.defined('position', position);
         if (!defined(direction)) {
             throw new DeveloperError('direction is required.');
         }

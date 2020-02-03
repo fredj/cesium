@@ -163,9 +163,7 @@ import Property from './Property.js';
      */
     DynamicGeometryUpdater.prototype.getBoundingSphere = function(result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(result)) {
-            throw new DeveloperError('result is required.');
-        }
+        Check.defined('result', result);
         //>>includeEnd('debug');
         var entity = this._entity;
         var primitive = this._primitive;

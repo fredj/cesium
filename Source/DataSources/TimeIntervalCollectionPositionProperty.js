@@ -1,12 +1,12 @@
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import ReferenceFrame from '../Core/ReferenceFrame.js';
 import TimeIntervalCollection from '../Core/TimeIntervalCollection.js';
 import PositionProperty from './PositionProperty.js';
 import Property from './Property.js';
+import Check from '../Core/Check.js';
 
     /**
      * A {@link TimeIntervalCollectionProperty} which is also a {@link PositionProperty}.
@@ -95,12 +95,8 @@ import Property from './Property.js';
      */
     TimeIntervalCollectionPositionProperty.prototype.getValueInReferenceFrame = function(time, referenceFrame, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
-        if (!defined(referenceFrame)) {
-            throw new DeveloperError('referenceFrame is required.');
-        }
+        Check.defined('time', time);
+        Check.defined('referenceFrame', referenceFrame);
         //>>includeEnd('debug');
 
         var position = this._intervals.findDataForIntervalContainingDate(time);

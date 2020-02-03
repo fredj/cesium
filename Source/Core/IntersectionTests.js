@@ -9,6 +9,7 @@ import Matrix3 from './Matrix3.js';
 import QuadraticRealPolynomial from './QuadraticRealPolynomial.js';
 import QuarticRealPolynomial from './QuarticRealPolynomial.js';
 import Ray from './Ray.js';
+import Check from '../Core/Check.js';
 
     /**
      * Functions for computing the intersection between geometries such as rays, planes, triangles, and ellipsoids.
@@ -31,9 +32,7 @@ import Ray from './Ray.js';
         if (!defined(ray)) {
             throw new DeveloperError('ray is required.');
         }
-        if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
+        Check.defined('plane', plane);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -707,9 +706,7 @@ import Ray from './Ray.js';
         if (!defined(endPoint1)) {
             throw new DeveloperError('endPoint1 is required.');
         }
-        if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
+        Check.defined('plane', plane);
         //>>includeEnd('debug');
 
         if (!defined(result)) {

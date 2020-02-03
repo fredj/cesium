@@ -1,11 +1,10 @@
-import defined from '../../Core/defined.js';
 import defineProperties from '../../Core/defineProperties.js';
 import destroyObject from '../../Core/destroyObject.js';
-import DeveloperError from '../../Core/DeveloperError.js';
 import knockout from '../../ThirdParty/knockout.js';
 import getElement from '../getElement.js';
 import InspectorShared from '../InspectorShared.js';
 import CesiumInspectorViewModel from './CesiumInspectorViewModel.js';
+import Check from '../../Core/Check.js';
 
     /**
      * Inspector widget to aid in debugging
@@ -20,13 +19,9 @@ import CesiumInspectorViewModel from './CesiumInspectorViewModel.js';
      */
     function CesiumInspector(container, scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
 
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         container = getElement(container);

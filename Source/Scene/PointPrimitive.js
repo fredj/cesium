@@ -12,6 +12,7 @@ import Matrix4 from '../Core/Matrix4.js';
 import NearFarScalar from '../Core/NearFarScalar.js';
 import SceneMode from './SceneMode.js';
 import SceneTransforms from './SceneTransforms.js';
+import Check from '../Core/Check.js';
 
     /**
      * A graphical point positioned in the 3D scene, that is created
@@ -515,9 +516,7 @@ import SceneTransforms from './SceneTransforms.js';
         if (!defined(pointPrimitiveCollection)) {
             throw new DeveloperError('PointPrimitive must be in a collection.');
         }
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         var modelMatrix = pointPrimitiveCollection.modelMatrix;

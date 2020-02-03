@@ -18,6 +18,7 @@ import HorizontalOrigin from './HorizontalOrigin.js';
 import SceneMode from './SceneMode.js';
 import SceneTransforms from './SceneTransforms.js';
 import VerticalOrigin from './VerticalOrigin.js';
+import Check from '../Core/Check.js';
 
     /**
      * A viewport-aligned image positioned in the 3D scene, that is created
@@ -1134,12 +1135,8 @@ import VerticalOrigin from './VerticalOrigin.js';
      */
     Billboard.prototype.setImage = function(id, image) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
-        if (!defined(image)) {
-            throw new DeveloperError('image is required.');
-        }
+        Check.defined('id', id);
+        Check.defined('image', image);
         //>>includeEnd('debug');
 
         if (this._imageId === id) {
@@ -1167,9 +1164,7 @@ import VerticalOrigin from './VerticalOrigin.js';
      */
     Billboard.prototype.setImageSubRegion = function(id, subRegion) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(id)) {
-            throw new DeveloperError('id is required.');
-        }
+        Check.defined('id', id);
         if (!defined(subRegion)) {
             throw new DeveloperError('subRegion is required.');
         }
@@ -1276,9 +1271,7 @@ import VerticalOrigin from './VerticalOrigin.js';
         if (!defined(billboardCollection)) {
             throw new DeveloperError('Billboard must be in a collection.  Was it removed?');
         }
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         // pixel offset for screen space computation is the pixelOffset + screen space translate

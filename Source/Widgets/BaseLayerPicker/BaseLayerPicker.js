@@ -1,11 +1,10 @@
-import defined from '../../Core/defined.js';
 import defineProperties from '../../Core/defineProperties.js';
 import destroyObject from '../../Core/destroyObject.js';
-import DeveloperError from '../../Core/DeveloperError.js';
 import FeatureDetection from '../../Core/FeatureDetection.js';
 import knockout from '../../ThirdParty/knockout.js';
 import getElement from '../getElement.js';
 import BaseLayerPickerViewModel from './BaseLayerPickerViewModel.js';
+import Check from '../../Core/Check.js';
 
     /**
      * <span style="display: block; text-align: center;">
@@ -91,9 +90,7 @@ import BaseLayerPickerViewModel from './BaseLayerPickerViewModel.js';
      */
     function BaseLayerPicker(container, options) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug');
 
         container = getElement(container);

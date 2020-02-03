@@ -10,6 +10,7 @@ import knockout from '../../ThirdParty/knockout.js';
 import NoSleep from '../../ThirdParty/NoSleep.js';
 import createCommand from '../createCommand.js';
 import getElement from '../getElement.js';
+import Check from '../../Core/Check.js';
 
     function lockScreen(orientation) {
         var locked = false;
@@ -80,9 +81,7 @@ import getElement from '../getElement.js';
      */
     function VRButtonViewModel(scene, vrElement) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         var that = this;

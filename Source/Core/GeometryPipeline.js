@@ -23,6 +23,7 @@ import Matrix4 from './Matrix4.js';
 import Plane from './Plane.js';
 import PrimitiveType from './PrimitiveType.js';
 import Tipsify from './Tipsify.js';
+import Check from './Check.js';
 
     /**
      * Content pipeline functions for geometries.
@@ -112,9 +113,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.toWireframe = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug');
 
         var indices = geometry.indices;
@@ -160,9 +159,7 @@ import Tipsify from './Tipsify.js';
         attributeName = defaultValue(attributeName, 'normal');
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         if (!defined(geometry.attributes.position)) {
             throw new DeveloperError('geometry.attributes.position is required.');
         }
@@ -226,9 +223,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.createAttributeLocations = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug')
 
         // There can be a WebGL performance hit when attribute 0 is disabled, so
@@ -301,9 +296,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.reorderForPreVertexCache = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug');
 
         var numVertices = Geometry.computeNumberOfVertices(geometry);
@@ -390,9 +383,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.reorderForPostVertexCache = function(geometry, cacheCapacity) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug');
 
         var indices = geometry.indices;
@@ -469,9 +460,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.fitToUnsignedShortIndices = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         if ((defined(geometry.indices)) &&
             ((geometry.primitiveType !== PrimitiveType.TRIANGLES) &&
              (geometry.primitiveType !== PrimitiveType.LINES) &&
@@ -576,9 +565,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.projectTo2D = function(geometry, attributeName, attributeName3D, attributeName2D, projection) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         if (!defined(attributeName)) {
             throw new DeveloperError('attributeName is required.');
         }
@@ -662,9 +649,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.encodeAttribute = function(geometry, attributeName, attributeHighName, attributeLowName) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         if (!defined(attributeName)) {
             throw new DeveloperError('attributeName is required.');
         }
@@ -1048,9 +1033,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.computeNormal = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         if (!defined(geometry.attributes.position) || !defined(geometry.attributes.position.values)) {
             throw new DeveloperError('geometry.attributes.position.values is required.');
         }
@@ -1199,9 +1182,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.computeTangentAndBitangent = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug');
 
         var attributes = geometry.attributes;
@@ -1338,9 +1319,7 @@ import Tipsify from './Tipsify.js';
      */
     GeometryPipeline.compressVertices = function(geometry) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+        Check.defined('geometry', geometry);
         //>>includeEnd('debug');
 
         var extrudeAttribute = geometry.attributes.extrudeDirection;

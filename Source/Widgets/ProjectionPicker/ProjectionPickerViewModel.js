@@ -1,12 +1,12 @@
 import defined from '../../Core/defined.js';
 import defineProperties from '../../Core/defineProperties.js';
 import destroyObject from '../../Core/destroyObject.js';
-import DeveloperError from '../../Core/DeveloperError.js';
 import EventHelper from '../../Core/EventHelper.js';
 import OrthographicFrustum from '../../Core/OrthographicFrustum.js';
 import SceneMode from '../../Scene/SceneMode.js';
 import knockout from '../../ThirdParty/knockout.js';
 import createCommand from '../createCommand.js';
+import Check from '../../Core/Check.js';
 
     /**
      * The view model for {@link ProjectionPicker}.
@@ -17,9 +17,7 @@ import createCommand from '../createCommand.js';
      */
     function ProjectionPickerViewModel(scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         this._scene = scene;

@@ -2,9 +2,9 @@ import Cartesian3 from './Cartesian3.js';
 import Cartesian4 from './Cartesian4.js';
 import defaultValue from './defaultValue.js';
 import defined from './defined.js';
-import DeveloperError from './DeveloperError.js';
 import Intersect from './Intersect.js';
 import Plane from './Plane.js';
+import Check from '../Core/Check.js';
 
     /**
      * The culling volume defined by planes.
@@ -44,9 +44,7 @@ import Plane from './Plane.js';
      */
     CullingVolume.fromBoundingSphere = function(boundingSphere, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingSphere)) {
-            throw new DeveloperError('boundingSphere is required.');
-        }
+        Check.defined('boundingSphere', boundingSphere);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -105,9 +103,7 @@ import Plane from './Plane.js';
      */
     CullingVolume.prototype.computeVisibility = function(boundingVolume) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingVolume)) {
-            throw new DeveloperError('boundingVolume is required.');
-        }
+        Check.defined('boundingVolume', boundingVolume);
         //>>includeEnd('debug');
 
         var planes = this.planes;
@@ -138,12 +134,8 @@ import Plane from './Plane.js';
      */
     CullingVolume.prototype.computeVisibilityWithPlaneMask = function(boundingVolume, parentPlaneMask) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(boundingVolume)) {
-            throw new DeveloperError('boundingVolume is required.');
-        }
-        if (!defined(parentPlaneMask)) {
-            throw new DeveloperError('parentPlaneMask is required.');
-        }
+        Check.defined('boundingVolume', boundingVolume);
+        Check.defined('parentPlaneMask', parentPlaneMask);
         //>>includeEnd('debug');
 
         if (parentPlaneMask === CullingVolume.MASK_OUTSIDE || parentPlaneMask === CullingVolume.MASK_INSIDE) {

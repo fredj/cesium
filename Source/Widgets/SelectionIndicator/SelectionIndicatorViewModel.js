@@ -6,6 +6,7 @@ import DeveloperError from '../../Core/DeveloperError.js';
 import EasingFunction from '../../Core/EasingFunction.js';
 import SceneTransforms from '../../Scene/SceneTransforms.js';
 import knockout from '../../ThirdParty/knockout.js';
+import Check from '../../Core/Check.js';
 
     var screenSpacePos = new Cartesian2();
     var offScreen = '-1000px';
@@ -21,17 +22,13 @@ import knockout from '../../ThirdParty/knockout.js';
      */
     function SelectionIndicatorViewModel(scene, selectionIndicatorElement, container) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
 
         if (!defined(selectionIndicatorElement)) {
             throw new DeveloperError('selectionIndicatorElement is required.');
         }
 
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         //>>includeEnd('debug')
 
         this._scene = scene;

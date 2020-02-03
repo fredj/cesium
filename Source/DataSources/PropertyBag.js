@@ -6,6 +6,7 @@ import Event from '../Core/Event.js';
 import ConstantProperty from './ConstantProperty.js';
 import createPropertyDescriptor from './createPropertyDescriptor.js';
 import Property from './Property.js';
+import Check from '../Core/Check.js';
 
     /**
      * A {@link Property} whose value is a key-value mapping of property names to the computed value of other properties.
@@ -99,9 +100,7 @@ import Property from './Property.js';
         var propertyNames = this._propertyNames;
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(propertyName)) {
-            throw new DeveloperError('propertyName is required.');
-        }
+        Check.defined('propertyName', propertyName);
         if (propertyNames.indexOf(propertyName) !== -1) {
             throw new DeveloperError(propertyName + ' is already a registered property.');
         }
@@ -129,9 +128,7 @@ import Property from './Property.js';
         var index = propertyNames.indexOf(propertyName);
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(propertyName)) {
-            throw new DeveloperError('propertyName is required.');
-        }
+        Check.defined('propertyName', propertyName);
         if (index === -1) {
             throw new DeveloperError(propertyName + ' is not a registered property.');
         }
@@ -154,9 +151,7 @@ import Property from './Property.js';
      */
     PropertyBag.prototype.getValue = function(time, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         //>>includeEnd('debug');
 
         if (!defined(result)) {
@@ -180,9 +175,7 @@ import Property from './Property.js';
      */
     PropertyBag.prototype.merge = function(source, createPropertyCallback) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(source)) {
-            throw new DeveloperError('source is required.');
-        }
+        Check.defined('source', source);
         //>>includeEnd('debug');
 
         var propertyNames = this._propertyNames;

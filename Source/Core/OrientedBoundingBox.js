@@ -315,9 +315,7 @@ import Rectangle from './Rectangle.js';
      */
     OrientedBoundingBox.fromRectangle = function(rectangle, minimumHeight, maximumHeight, ellipsoid, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(rectangle)) {
-            throw new DeveloperError('rectangle is required');
-        }
+        Check.defined('rectangle', rectangle);
         if (rectangle.width < 0.0 || rectangle.width > CesiumMath.TWO_PI) {
             throw new DeveloperError('Rectangle width must be between 0 and 2*pi');
         }
@@ -449,13 +447,9 @@ import Rectangle from './Rectangle.js';
      */
     OrientedBoundingBox.intersectPlane = function(box, plane) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(box)) {
-            throw new DeveloperError('box is required.');
-        }
+        Check.defined('box', box);
 
-        if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
+        Check.defined('plane', plane);
         //>>includeEnd('debug');
 
         var center = box.center;
@@ -500,12 +494,8 @@ import Rectangle from './Rectangle.js';
         // See Geometric Tools for Computer Graphics 10.4.2
 
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(box)) {
-            throw new DeveloperError('box is required.');
-        }
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('box', box);
+        Check.defined('cartesian', cartesian);
         //>>includeEnd('debug');
 
         var offset = Cartesian3.subtract(cartesian, box.center, scratchOffset);
@@ -575,13 +565,9 @@ import Rectangle from './Rectangle.js';
      */
     OrientedBoundingBox.computePlaneDistances = function(box, position, direction, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(box)) {
-            throw new DeveloperError('box is required.');
-        }
+        Check.defined('box', box);
 
-        if (!defined(position)) {
-            throw new DeveloperError('position is required.');
-        }
+        Check.defined('position', position);
 
         if (!defined(direction)) {
             throw new DeveloperError('direction is required.');
@@ -706,9 +692,7 @@ import Rectangle from './Rectangle.js';
      */
     OrientedBoundingBox.isOccluded = function(box, occluder) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(box)) {
-            throw new DeveloperError('box is required.');
-        }
+        Check.defined('box', box);
         if (!defined(occluder)) {
             throw new DeveloperError('occluder is required.');
         }

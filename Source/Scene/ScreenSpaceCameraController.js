@@ -5,7 +5,6 @@ import Cartographic from '../Core/Cartographic.js';
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import destroyObject from '../Core/destroyObject.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Ellipsoid from '../Core/Ellipsoid.js';
 import HeadingPitchRoll from '../Core/HeadingPitchRoll.js';
 import IntersectionTests from '../Core/IntersectionTests.js';
@@ -25,6 +24,7 @@ import MapMode2D from './MapMode2D.js';
 import SceneMode from './SceneMode.js';
 import SceneTransforms from './SceneTransforms.js';
 import TweenCollection from './TweenCollection.js';
+import Check from '../Core/Check.js';
 
     /**
      * Modifies the camera position and orientation based on mouse input to a canvas.
@@ -35,9 +35,7 @@ import TweenCollection from './TweenCollection.js';
      */
     function ScreenSpaceCameraController(scene) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         /**

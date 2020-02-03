@@ -5,6 +5,7 @@ import destroyObject from '../../Core/destroyObject.js';
 import DeveloperError from '../../Core/DeveloperError.js';
 import getElement from '../getElement.js';
 import subscribeAndEvaluate from '../subscribeAndEvaluate.js';
+import Check from '../../Core/Check.js';
 
     var svgNS = 'http://www.w3.org/2000/svg';
     var xlinkNS = 'http://www.w3.org/1999/xlink';
@@ -322,9 +323,7 @@ import subscribeAndEvaluate from '../subscribeAndEvaluate.js';
      */
     function Animation(container, viewModel) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(container)) {
-            throw new DeveloperError('container is required.');
-        }
+        Check.defined('container', container);
         if (!defined(viewModel)) {
             throw new DeveloperError('viewModel is required.');
         }

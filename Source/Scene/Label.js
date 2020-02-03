@@ -15,6 +15,7 @@ import HorizontalOrigin from './HorizontalOrigin.js';
 import LabelStyle from './LabelStyle.js';
 import SDFSettings from './SDFSettings.js';
 import VerticalOrigin from './VerticalOrigin.js';
+import Check from '../Core/Check.js';
 
     var fontInfoCache = {};
     var fontInfoCacheLength = 0;
@@ -1117,9 +1118,7 @@ import VerticalOrigin from './VerticalOrigin.js';
      */
     Label.prototype.computeScreenSpacePosition = function(scene, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         if (!defined(result)) {

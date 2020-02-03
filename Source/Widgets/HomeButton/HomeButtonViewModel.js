@@ -3,6 +3,7 @@ import defineProperties from '../../Core/defineProperties.js';
 import DeveloperError from '../../Core/DeveloperError.js';
 import knockout from '../../ThirdParty/knockout.js';
 import createCommand from '../createCommand.js';
+import Check from '../../Core/Check.js';
 
     /**
      * The view model for {@link HomeButton}.
@@ -14,9 +15,7 @@ import createCommand from '../createCommand.js';
      */
     function HomeButtonViewModel(scene, duration) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
+        Check.defined('scene', scene);
         //>>includeEnd('debug');
 
         this._scene = scene;

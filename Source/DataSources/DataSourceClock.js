@@ -2,10 +2,10 @@ import Clock from '../Core/Clock.js';
 import defaultValue from '../Core/defaultValue.js';
 import defined from '../Core/defined.js';
 import defineProperties from '../Core/defineProperties.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import Event from '../Core/Event.js';
 import JulianDate from '../Core/JulianDate.js';
 import createRawPropertyDescriptor from './createRawPropertyDescriptor.js';
+import Check from '../Core/Check.js';
 
     /**
      * Represents desired clock settings for a particular {@link DataSource}.  These settings may be applied
@@ -131,9 +131,7 @@ import createRawPropertyDescriptor from './createRawPropertyDescriptor.js';
      */
     DataSourceClock.prototype.merge = function(source) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(source)) {
-            throw new DeveloperError('source is required.');
-        }
+        Check.defined('source', source);
         //>>includeEnd('debug');
 
         this.startTime = defaultValue(this.startTime, source.startTime);

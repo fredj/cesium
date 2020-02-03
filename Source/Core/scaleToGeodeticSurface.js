@@ -2,6 +2,7 @@ import Cartesian3 from './Cartesian3.js';
 import defined from './defined.js';
 import DeveloperError from './DeveloperError.js';
 import CesiumMath from './Math.js';
+import Check from '../Core/Check.js';
 
     var scaleToGeodeticSurfaceIntersection = new Cartesian3();
     var scaleToGeodeticSurfaceGradient = new Cartesian3();
@@ -24,9 +25,7 @@ import CesiumMath from './Math.js';
      */
     function scaleToGeodeticSurface(cartesian, oneOverRadii, oneOverRadiiSquared, centerToleranceSquared, result) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+        Check.defined('cartesian', cartesian);
         if (!defined(oneOverRadii)) {
             throw new DeveloperError('oneOverRadii is required.');
         }

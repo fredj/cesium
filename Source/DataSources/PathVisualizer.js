@@ -2,7 +2,6 @@ import AssociativeArray from '../Core/AssociativeArray.js';
 import Cartesian3 from '../Core/Cartesian3.js';
 import defined from '../Core/defined.js';
 import destroyObject from '../Core/destroyObject.js';
-import DeveloperError from '../Core/DeveloperError.js';
 import JulianDate from '../Core/JulianDate.js';
 import Matrix3 from '../Core/Matrix3.js';
 import Matrix4 from '../Core/Matrix4.js';
@@ -19,6 +18,7 @@ import ReferenceProperty from './ReferenceProperty.js';
 import SampledPositionProperty from './SampledPositionProperty.js';
 import ScaledPositionProperty from './ScaledPositionProperty.js';
 import TimeIntervalCollectionPositionProperty from './TimeIntervalCollectionPositionProperty.js';
+import Check from '../Core/Check.js';
 
     var defaultResolution = 60.0;
     var defaultWidth = 1.0;
@@ -368,12 +368,8 @@ import TimeIntervalCollectionPositionProperty from './TimeIntervalCollectionPosi
      */
     function PathVisualizer(scene, entityCollection) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(scene)) {
-            throw new DeveloperError('scene is required.');
-        }
-        if (!defined(entityCollection)) {
-            throw new DeveloperError('entityCollection is required.');
-        }
+        Check.defined('scene', scene);
+        Check.defined('entityCollection', entityCollection);
         //>>includeEnd('debug');
 
         entityCollection.collectionChanged.addEventListener(PathVisualizer.prototype._onCollectionChanged, this);
@@ -395,9 +391,7 @@ import TimeIntervalCollectionPositionProperty from './TimeIntervalCollectionPosi
      */
     PathVisualizer.prototype.update = function(time) {
         //>>includeStart('debug', pragmas.debug);
-        if (!defined(time)) {
-            throw new DeveloperError('time is required.');
-        }
+        Check.defined('time', time);
         //>>includeEnd('debug');
 
         var updaters = this._updaters;
