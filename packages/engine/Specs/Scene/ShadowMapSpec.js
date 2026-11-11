@@ -359,7 +359,11 @@ describe(
       });
     }
 
-    function createShadowMapForDirectionalLight() {
+    function createShadowMapForDirectionalLight(
+      halfWidth = 50.0,
+      far = 1000.0,
+      lightHeight = 20.0,
+    ) {
       const center = Cartesian3.fromRadians(longitude, latitude, height);
       scene.camera.lookAt(
         center,
@@ -367,17 +371,17 @@ describe(
       );
 
       const frustum = new OrthographicOffCenterFrustum();
-      frustum.left = -50.0;
-      frustum.right = 50.0;
-      frustum.bottom = -50.0;
-      frustum.top = 50.0;
+      frustum.left = -halfWidth;
+      frustum.right = halfWidth;
+      frustum.bottom = -halfWidth;
+      frustum.top = halfWidth;
       frustum.near = 1.0;
-      frustum.far = 1000;
+      frustum.far = far;
 
       // Create light camera pointing straight down
       const lightCamera = new Camera(scene);
       lightCamera.frustum = frustum;
-      lightCamera.lookAt(center, new Cartesian3(0.0, 0.0, 20.0));
+      lightCamera.lookAt(center, new Cartesian3(0.0, 0.0, lightHeight));
 
       scene.shadowMap = new ShadowMap({
         context: scene.context,
@@ -1148,6 +1152,41 @@ describe(
         new HeadingPitchRange(0.0, CesiumMath.toRadians(-70.0), 5.0),
       );
 
+      renderAndCall(function (rgba) {
+        expect(scene.shadowMap.outOfView).toBe(true);
+      });
+    });
+
+    it("is in view only when the camera looks inside a wide and shallow orthographic shadow map", function () {
+      box.show = true;
+      floor.show = true;
+
+      // 200 meters across, 9 meters deep
+      createShadowMapForDirectionalLight(100.0, 10.0, 5.0);
+
+      const enuToFixedFrame = FixedFrameTransforms.eastNorthUpToFixedFrame(
+        Cartesian3.fromRadians(longitude, latitude, height),
+      );
+      function lookAtEast(distance) {
+        const target = Matrix4.multiplyByPoint(
+          enuToFixedFrame,
+          new Cartesian3(distance, 0.0, 0.0),
+          new Cartesian3(),
+        );
+        scene.camera.lookAt(
+          target,
+          new HeadingPitchRange(0.0, CesiumMath.toRadians(-70.0), 5.0),
+        );
+      }
+
+      // Near the shadow map's edge
+      lookAtEast(80.0);
+      renderAndCall(function (rgba) {
+        expect(scene.shadowMap.outOfView).toBe(false);
+      });
+
+      // Far outside the shadow map
+      lookAtEast(1000.0);
       renderAndCall(function (rgba) {
         expect(scene.shadowMap.outOfView).toBe(true);
       });

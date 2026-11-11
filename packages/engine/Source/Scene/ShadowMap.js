@@ -1411,7 +1411,6 @@ function computeOmnidirectional(shadowMap, frameState) {
 const scratchCartesian1 = new Cartesian3();
 const scratchCartesian2 = new Cartesian3();
 const scratchBoundingSphere = new BoundingSphere();
-const scratchCenter = scratchBoundingSphere.center;
 
 function checkVisibility(shadowMap, frameState) {
   const sceneCamera = shadowMap._sceneCamera;
@@ -1463,7 +1462,7 @@ function checkVisibility(shadowMap, frameState) {
     shadowMap._outOfView = false;
   } else if (shadowMap._isPointLight) {
     // Sphere-frustum intersection test
-    boundingSphere.center = shadowMapCamera.positionWC;
+    Cartesian3.clone(shadowMapCamera.positionWC, boundingSphere.center);
     boundingSphere.radius = shadowMap._pointLightRadius;
     shadowMap._outOfView =
       frameState.cullingVolume.computeVisibility(boundingSphere) ===
@@ -1473,19 +1472,26 @@ function checkVisibility(shadowMap, frameState) {
       !shadowMap._boundingSphere.equals(boundingSphere);
     BoundingSphere.clone(boundingSphere, shadowMap._boundingSphere);
   } else {
-    // Simplify frustum-frustum intersection test as a sphere-frustum test
-    const frustumRadius = shadowMapCamera.frustum.far / 2.0;
-    const frustumCenter = Cartesian3.add(
-      shadowMapCamera.positionWC,
-      Cartesian3.multiplyByScalar(
-        shadowMapCamera.directionWC,
-        frustumRadius,
-        scratchCenter,
-      ),
-      scratchCenter,
+    // Simplify frustum-frustum intersection test as a sphere-frustum test,
+    // with a sphere bounding the light frustum's corners
+    const viewProjection = Matrix4.multiply(
+      shadowMapCamera.frustum.projectionMatrix,
+      shadowMapCamera.viewMatrix,
+      scratchMatrix,
     );
-    boundingSphere.center = frustumCenter;
-    boundingSphere.radius = frustumRadius;
+    const inverseViewProjection = Matrix4.inverse(
+      viewProjection,
+      scratchMatrix,
+    );
+    for (let i = 0; i < 8; ++i) {
+      const corner = Matrix4.multiplyByVector(
+        inverseViewProjection,
+        frustumCornersNDC[i],
+        scratchFrustumCorners[i],
+      );
+      Cartesian3.divideByScalar(corner, corner.w, corner); // Handle the perspective divide
+    }
+    BoundingSphere.fromPoints(scratchFrustumCorners, boundingSphere);
     shadowMap._outOfView =
       frameState.cullingVolume.computeVisibility(boundingSphere) ===
       Intersect.OUTSIDE;
