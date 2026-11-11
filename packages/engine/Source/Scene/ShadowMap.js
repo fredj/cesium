@@ -27,7 +27,6 @@ import {
   defined,
   destroyObject,
 } from "@cesium/core";
-import FeatureDetection from "../Core/FeatureDetection.js";
 import ClearCommand from "../Renderer/ClearCommand.js";
 import ContextLimits from "../Renderer/ContextLimits.js";
 import CubeMap from "../Renderer/CubeMap.js";
@@ -142,22 +141,8 @@ function ShadowMap(options) {
   this._outOfViewPrevious = false;
   this._needsUpdate = true;
 
-  // In IE11 and Edge polygon offset is not functional.
-  // TODO : Also disabled for instances of Firefox and Chrome running ANGLE that do not support depth textures.
-  // Re-enable once https://github.com/CesiumGS/cesium/issues/4560 is resolved.
-  let polygonOffsetSupported = true;
-  if (
-    FeatureDetection.isEdge() ||
-    ((FeatureDetection.isChrome() || FeatureDetection.isFirefox()) &&
-      FeatureDetection.isWindows() &&
-      !context.depthTexture)
-  ) {
-    polygonOffsetSupported = false;
-  }
-  this._polygonOffsetSupported = polygonOffsetSupported;
-
   this._terrainBias = {
-    polygonOffset: polygonOffsetSupported,
+    polygonOffset: true,
     polygonOffsetFactor: 1.1,
     polygonOffsetUnits: 4.0,
     normalOffset: this._normalOffset,
@@ -168,7 +153,7 @@ function ShadowMap(options) {
   };
 
   this._primitiveBias = {
-    polygonOffset: polygonOffsetSupported,
+    polygonOffset: true,
     polygonOffsetFactor: 1.1,
     polygonOffsetUnits: 4.0,
     normalOffset: this._normalOffset,

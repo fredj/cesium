@@ -178,14 +178,13 @@ ShadowMapShader.getShadowReceiveShaderKeyword = function (
   hasTerrainNormal,
 ) {
   const usesDepthTexture = shadowMap._usesDepthTexture;
-  const polygonOffsetSupported = shadowMap._polygonOffsetSupported;
   const isPointLight = shadowMap._isPointLight;
   const isSpotLight = shadowMap._isSpotLight;
   const hasCascades = shadowMap._numberOfCascades > 1;
   const debugCascadeColors = shadowMap.debugCascadeColors;
   const softShadows = shadowMap.softShadows;
 
-  return `receiveShadow ${usesDepthTexture}${polygonOffsetSupported}${isPointLight}${isSpotLight}${hasCascades}${debugCascadeColors}${softShadows}${castShadows}${isTerrain}${hasTerrainNormal}`;
+  return `receiveShadow ${usesDepthTexture}${isPointLight}${isSpotLight}${hasCascades}${debugCascadeColors}${softShadows}${castShadows}${isTerrain}${hasTerrainNormal}`;
 };
 
 ShadowMapShader.createShadowReceiveVertexShader = function (
@@ -228,7 +227,6 @@ ShadowMapShader.createShadowReceiveFragmentShader = function (
   const hasPositionVarying = defined(positionVaryingName);
 
   const usesDepthTexture = shadowMap._usesDepthTexture;
-  const polygonOffsetSupported = shadowMap._polygonOffsetSupported;
   const isPointLight = shadowMap._isPointLight;
   const isSpotLight = shadowMap._isSpotLight;
   const hasCascades = shadowMap._numberOfCascades > 1;
@@ -345,11 +343,6 @@ ShadowMapShader.createShadowReceiveFragmentShader = function (
   if (isTerrain) {
     // Scale depth bias based on view distance to reduce z-fighting in distant terrain
     fsSource += "    shadowParameters.depthBias *= max(depth * 0.01, 1.0); \n";
-  } else if (!polygonOffsetSupported) {
-    // If polygon offset isn't supported push the depth back based on view, however this
-    // causes light leaking at further away views
-    fsSource +=
-      "    shadowParameters.depthBias *= mix(1.0, 100.0, depth * 0.0015); \n";
   }
 
   if (isPointLight) {

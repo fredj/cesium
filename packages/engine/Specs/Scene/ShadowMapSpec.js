@@ -506,6 +506,8 @@ describe(
       expect(scene.shadowMap._cascadesEnabled).toBe(true);
       expect(scene.shadowMap._numberOfCascades).toBe(4);
       expect(scene.shadowMap._normalOffset).toBe(true);
+      expect(scene.shadowMap._terrainBias.polygonOffset).toBe(true);
+      expect(scene.shadowMap._primitiveBias.polygonOffset).toBe(true);
     });
 
     it("throws without options.context", function () {

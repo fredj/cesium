@@ -306,10 +306,7 @@ function updateSettings() {
   for (let i = 0; i < viewModel.biasModes.length; ++i) {
     const biasMode = viewModel.biasModes[i];
     const bias = shadowMap[`_${biasMode.type}Bias`];
-    bias.polygonOffset =
-      !shadowMap._isPointLight &&
-      shadowMap._polygonOffsetSupported &&
-      biasMode.polygonOffset();
+    bias.polygonOffset = !shadowMap._isPointLight && biasMode.polygonOffset();
     bias.polygonOffsetFactor = biasMode.polygonOffsetFactor();
     bias.polygonOffsetUnits = biasMode.polygonOffsetUnits();
     bias.normalOffset = biasMode.normalOffset();
